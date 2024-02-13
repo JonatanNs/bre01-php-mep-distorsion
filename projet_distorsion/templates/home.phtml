@@ -1,0 +1,25 @@
+<?php 
+    isset($_POST['salonId']) ? $_SESSION['selectedSalonId'] = $_POST['salonId'] : "";
+    isset($_POST['salonName']) ? $_SESSION['salonName'] = $_POST['salonName'] : ""; 
+    isset($_POST['addSalon-submit']) ? $_SESSION['selectedCategoryId'] = $_POST['categoryId'] : "";
+?> 
+    <div class="categories">
+        <?php require "templates/categories.phtml"; ?> 
+        <div class="categoryAndSalon">
+                <?php if(isset($_POST['addSalon-submit'])){ $_SESSION['selectedCategoryId']; require "templates/salon.phtml"; }  ?>
+                
+            <section class="category">
+                <?php $categoryManager = new HomeManager; ?>
+                
+                <div class="listCategory">
+                    <p><?= $categoryManager->listCategoriesAndSalon();?></p>
+                </div>
+            </section>
+        </div>
+    </div>
+    <section class="messages">
+        <h2>Salon <?= $_SESSION['salonName'] ?></h2>
+       <?php require "templates/message.phtml"; ?>
+       <?php $messageManager = new HomeManager; ?>
+       <p><?= $messageManager->listMessage();?></p>
+    </section>
